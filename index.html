@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF--8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit Ease | Interactive Brand Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Profit Ease Professional -->
+    <!-- Application Structure Plan: A thematic, single-page application with a sticky top navigation for quick access to key brand pillars: Core Identity, Personality, Visuals, and Messaging. This non-linear structure transforms a static document into an interactive, explorable brand guide, making it easier for stakeholders to find and reference specific information quickly. Interactions like clickable cards for values and interactive color swatches are used to reveal details on demand, reducing initial cognitive load and encouraging engagement. -->
+    <!-- Visualization & Content Choices: The report is qualitative. Visualizations are structural and informational. Logo Concept: HTML/CSS construction to visually represent the concept without SVG. Core Values: Interactive HTML cards (click to reveal) for better engagement. Color Palette: Interactive HTML swatches (click to show details) for easy reference and copying of codes. All interactions are handled by Vanilla JS and styling by Tailwind CSS, ensuring a clean, single-file implementation. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F7FAFC;
+            color: #2D3748;
+        }
+        .text-primary { color: #005A5B; }
+        .bg-primary { background-color: #005A5B; }
+        .text-accent { color: #00EAD3; }
+        .bg-accent { background-color: #00EAD3; }
+        .border-accent { border-color: #00EAD3; }
+        .nav-link.active {
+            color: #00EAD3;
+        }
+        .value-card .value-description {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .value-card.open .value-description {
+            max-height: 500px;
+        }
+         .value-card.open .plus-icon {
+            transform: rotate(45deg);
+        }
+        .plus-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 w-full shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary flex items-center">
+                <div class="w-8 h-8 mr-2 flex items-center justify-center bg-primary text-white font-bold rounded-md">P</div>
+                Profit Ease
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#summary" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Summary</a>
+                <a href="#identity" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Core Identity</a>
+                <a href="#personality" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Personality</a>
+                <a href="#visuals" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Visuals</a>
+                <a href="#messaging" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Messaging</a>
+            </div>
+             <button id="mobile-menu-button" class="md:hidden text-primary">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col space-y-4">
+             <a href="#summary" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Summary</a>
+            <a href="#identity" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Core Identity</a>
+            <a href="#personality" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Personality</a>
+            <a href="#visuals" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Visuals</a>
+            <a href="#messaging" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Messaging</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-20">
+
+        <section id="summary" class="text-center min-h-[60vh] flex flex-col items-center justify-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-primary tracking-tight">The Market Is Soaring. Your Profits Should Be, Too.</h1>
+            <p class="mt-6 max-w-3xl text-lg md:text-xl text-gray-600">
+                Right now, we are in an unprecedented high market. This is a historic opportunity for wealth creation, and Profit Ease is your key to unlocking it. Thanks to our proprietary automated system, our clients are turning initial investments of as little as $150 into returns of up to $6,000. This isn't a prediction—it's what's happening for our users right now.
+            </p>
+        </section>
+
+        <section id="identity" class="py-16 md:py-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary">Our Core Identity</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">We are built for this exact moment. Our entire platform is engineered to capitalize on high-growth market conditions and deliver life-changing returns.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-primary mb-2">Mission</h3>
+                    <p class="text-gray-600">To give you the automated tools to capitalize on this historic market surge and generate life-changing returns from minimal starting capital.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-primary mb-2">Vision</h3>
+                    <p class="text-gray-600">To be the #1 platform for individuals capitalizing on the current economic boom, turning everyday people into market winners with our automated technology.</p>
+                </div>
+            </div>
+             <div class="mt-12">
+                <h3 class="text-2xl font-bold text-primary text-center mb-8">Our Values</h3>
+                <div class="space-y-4 max-w-4xl mx-auto">
+                    <div class="value-card bg-white rounded-xl shadow-lg cursor-pointer overflow-hidden" data-value="1">
+                        <div class="p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-bold text-primary">The Automated Profit Engine</h4>
+                            <div class="plus-icon text-accent text-3xl font-light">+</div>
+                        </div>
+                        <div class="value-description px-6 pb-6">
+                            <p class="text-gray-600">Our system works 24/7 to find and exploit market opportunities. You don't lift a finger; our technology does the work, turning small stakes into massive payouts.</p>
+                        </div>
+                    </div>
+                     <div class="value-card bg-white rounded-xl shadow-lg cursor-pointer overflow-hidden" data-value="2">
+                        <div class="p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-bold text-primary">Market Timing Mastery</h4>
+                            <div class="plus-icon text-accent text-3xl font-light">+</div>
+                        </div>
+                        <div class="value-description px-6 pb-6">
+                            <p class="text-gray-600">This isn't luck. Our system is designed for moments exactly like this. We provide the technology to get in while the market is high and multiply your investment.</p>
+                        </div>
+                    </div>
+                     <div class="value-card bg-white rounded-xl shadow-lg cursor-pointer overflow-hidden" data-value="3">
+                        <div class="p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-bold text-primary">Verified Returns</h4>
+                            <div class="plus-icon text-accent text-3xl font-light">+</div>
+                        </div>
+                        <div class="value-description px-6 pb-6">
+                            <p class="text-gray-600">Forget promises. We deliver proof. Our system is consistently turning small investments like $150 into $6,000. These are the results our clients see today.</p>
+                        </div>
+                    </div>
+                     <div class="value-card bg-white rounded-xl shadow-lg cursor-pointer overflow-hidden" data-value="4">
+                        <div class="p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-bold text-primary">Life-Changing Capital</h4>
+                            <div class="plus-icon text-accent text-3xl font-light">+</div>
+                        </div>
+                        <div class="value-description px-6 pb-6">
+                            <p class="text-gray-600">This is your opportunity to achieve exponential financial growth. We provide the key to unlock the market's potential and secure your financial future, right now.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="personality" class="py-16 md:py-24 bg-white rounded-2xl">
+            <div class="text-center mb-12 px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary">Our Personality & Voice</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">We embody "The Wealth Multiplier." Our voice is urgent, confident, and direct. We provide exclusive access to a once-in-a-generation market opportunity.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="text-center p-6">
+                    <div class="text-5xl mb-4 text-accent">✓</div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Urgent & Action-Oriented</h3>
+                    <p class="text-gray-600">The market won't wait. Our language is designed to compel immediate action to seize this limited-time opportunity for massive profit.</p>
+                </div>
+                <div class="text-center p-6">
+                     <div class="text-5xl mb-4 text-accent">✓</div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Clear & Specific</h3>
+                    <p class="text-gray-600">No jargon, just numbers. We tell you exactly what's possible: turn $150 into $6,000 with our automated system. It's that simple.</p>
+                </div>
+                <div class="text-center p-6">
+                     <div class="text-5xl mb-4 text-accent">✓</div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Exclusive & Aspirational</h3>
+                    <p class="text-gray-600">This isn't for everyone. It's for those who want to build serious wealth, fast. Our tone speaks to the winner inside you.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="visuals" class="py-16 md:py-24">
+             <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary">Our Visual Identity</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Our visual identity is minimalist, sleek, and professional. It’s designed to inspire confidence and reflect our commitment to simplicity and innovation.</p>
+            </div>
+            <div class="space-y-16">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary mb-4">Logo Concept</h3>
+                        <p class="text-gray-600">A clean, abstract logomark that combines an upward-trending arrow with the letter 'P'. The arrow signifies growth and profitability, while its seamless integration into the initial creates a sense of effortless flow and efficiency. The wordmark "Profit Ease" is set in a modern, geometric sans-serif font.</p>
+                    </div>
+                    <div class="flex justify-center items-center">
+                        <div class="w-48 h-48 bg-primary rounded-2xl flex items-center justify-center text-white text-8xl font-bold relative overflow-hidden">
+                            P
+                            <div class="absolute w-12 h-24 bg-accent" style="clip-path: polygon(100% 0, 0 50%, 100% 100%); right: 30px; top: 36px; transform: rotate(-15deg);"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold text-primary mb-4 text-center">Color Palette</h3>
+                    <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">Our palette is professional and modern, using a foundation of trust with a splash of innovative energy. Click on a color to see its details.</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <div class="color-swatch w-32 h-32 rounded-lg cursor-pointer" style="background-color: #005A5B;" data-name="Primary (Deep Teal)" data-hex="#005A5B" data-desc="Conveys trust, stability, and financial sophistication."></div>
+                        <div class="color-swatch w-32 h-32 rounded-lg cursor-pointer" style="background-color: #00EAD3;" data-name="Accent (Bright Mint)" data-hex="#00EAD3" data-desc="Represents innovation, ease, and positive growth. Used for calls-to-action and highlights."></div>
+                        <div class="color-swatch w-32 h-32 rounded-lg cursor-pointer" style="background-color: #2D3748;" data-name="Neutral (Charcoal Gray)" data-hex="#2D3748" data-desc="Used for primary text to be softer than pure black."></div>
+                        <div class="color-swatch w-32 h-32 rounded-lg cursor-pointer border" style="background-color: #F7FAFC;" data-name="Background (Cloud White)" data-hex="#F7FAFC" data-desc="A clean, airy off-white that keeps the aesthetic minimalist and focused."></div>
+                    </div>
+                    <div id="color-details" class="mt-8 text-center bg-white p-6 rounded-xl shadow-md max-w-md mx-auto min-h-[120px] flex flex-col justify-center transition-opacity duration-300 opacity-0">
+                        <h4 id="color-name" class="text-xl font-bold text-primary"></h4>
+                        <p id="color-hex" class="text-gray-500 font-mono my-1"></p>
+                        <p id="color-desc" class="text-gray-600"></p>
+                    </div>
+                </div>
+
+                 <div>
+                    <h3 class="text-2xl font-bold text-primary mb-4 text-center">Typography</h3>
+                    <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">We use the 'Inter' typeface for its clean, modern, and highly legible appearance, ensuring a professional aesthetic across all communications.</p>
+                    <div class="grid md:grid-cols-2 gap-8 bg-white p-8 rounded-xl shadow-lg">
+                        <div>
+                            <p class="text-lg text-gray-500 mb-2">Headlines</p>
+                            <p class="text-4xl font-bold text-primary">Inter Bold</p>
+                        </div>
+                        <div>
+                            <p class="text-lg text-gray-500 mb-2">Body Text</p>
+                            <p class="text-lg text-gray-700">Inter Regular is used for all body copy to ensure clarity and readability. It provides a smooth reading experience for longer-form content.</p>
+                        </div>
+                    </div>
+                </div>
+
+                 <div>
+                    <h3 class="text-2xl font-bold text-primary mb-4 text-center">Imagery Style</h3>
+                    <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">Our imagery is clean, bright, and professional. We feature diverse teams in modern, minimalist workspaces, focusing on collaboration, focus, and success.</p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <img src="https://placehold.co/600x400/F7FAFC/2D3748?text=Collaboration" alt="Placeholder image showing collaboration" class="rounded-lg shadow-md aspect-video object-cover">
+                        <img src="https://placehold.co/600x400/005A5B/FFFFFF?text=Focus" alt="Placeholder image showing focus" class="rounded-lg shadow-md aspect-video object-cover">
+                        <img src="https://placehold.co/600x400/00EAD3/2D3748?text=Success" alt="Placeholder image showing success" class="rounded-lg shadow-md aspect-video object-cover">
+                        <img src="https://placehold.co/600x400/2D3748/FFFFFF?text=Modern+Workspace" alt="Placeholder image of a modern workspace" class="rounded-lg shadow-md aspect-video object-cover">
+                         <img src="https://placehold.co/600x400/F7FAFC/005A5B?text=Innovation" alt="Placeholder image showing innovation" class="rounded-lg shadow-md aspect-video object-cover">
+                         <img src="https://placehold.co/600x400/FFFFFF/2D3748?text=Clarity" alt="Placeholder image showing clarity" class="rounded-lg shadow-md aspect-video object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="messaging" class="py-16 md:py-24 text-center">
+             <h2 class="text-3xl md:text-4xl font-bold text-primary">Key Messaging</h2>
+             <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">These taglines are your call to action. They are a reminder of the incredible wealth being generated right now, and how you can claim your share.</p>
+             <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <div class="bg-primary text-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <p class="text-2xl font-bold">Your Automated Path to $6,000.</p>
+                    <p class="text-sm opacity-80 mt-2">(Primary Tagline)</p>
+                </div>
+                 <div class="bg-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <p class="text-2xl font-bold text-primary">The Market is High. Your Profits Should Be Higher.</p>
+                </div>
+                 <div class="bg-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <p class="text-2xl font-bold text-primary">Don't Miss Out. The Time Is Now.</p>
+                </div>
+                 <div class="bg-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <p class="text-2xl font-bold text-primary">The Machine That Prints Money.</p>
+                </div>
+             </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+             <p class="text-2xl font-bold text-primary mb-4">Profit Ease</p>
+             <p>&copy; 2025 Profit Ease Inc. All Rights Reserved.</p>
+             <div class="mt-4">
+                <a href="https://www.tiktok.com/@catalina_bonilla__" target="_blank" class="text-gray-500 hover:text-primary transition-colors duration-300">
+                    Follow us on TikTok: @catalina_bonilla__
+                </a>
+             </div>
+             <p class="text-sm mt-4">This is an interactive brand guide. Not for public distribution.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const valueCards = document.querySelectorAll('.value-card');
+            valueCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const wasOpen = card.classList.contains('open');
+                    valueCards.forEach(c => c.classList.remove('open'));
+                    if (!wasOpen) {
+                        card.classList.add('open');
+                    }
+                });
+            });
+
+            const colorSwatches = document.querySelectorAll('.color-swatch');
+            const colorDetails = document.getElementById('color-details');
+            const colorName = document.getElementById('color-name');
+            const colorHex = document.getElementById('color-hex');
+            const colorDesc = document.getElementById('color-desc');
+
+            colorSwatches.forEach(swatch => {
+                swatch.addEventListener('click', () => {
+                    colorName.textContent = swatch.dataset.name;
+                    colorHex.textContent = swatch.dataset.hex;
+                    colorDesc.textContent = swatch.dataset.desc;
+                    colorDetails.classList.remove('opacity-0');
+                    
+                    colorSwatches.forEach(s => s.classList.remove('ring-4', 'ring-offset-2', 'ring-accent'));
+                    swatch.classList.add('ring-4', 'ring-offset-2', 'ring-accent');
+                });
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-50% 0px -50% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (mobileMenu.classList.contains('hidden') === false) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
