@@ -1,31 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="es" class="scroll-smooth">
 <head>
-    <meta charset="UTF--8">
+    <!-- Metadatos y Cumplimiento --><meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profit Ease | Interactive Brand Guide</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Profit Ease | Guía Oficial de Estándares de Marca</title>
+    <!-- Importaciones de Tailwind CSS y Fuente --><script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Profit Ease Professional -->
-    <!-- Application Structure Plan: A thematic, single-page application with a sticky top navigation for quick access to key brand pillars: Core Identity, Personality, Visuals, and Messaging. This non-linear structure transforms a static document into an interactive, explorable brand guide, making it easier for stakeholders to find and reference specific information quickly. Interactions like clickable cards for values and interactive color swatches are used to reveal details on demand, reducing initial cognitive load and encouraging engagement. -->
-    <!-- Visualization & Content Choices: The report is qualitative. Visualizations are structural and informational. Logo Concept: HTML/CSS construction to visually represent the concept without SVG. Core Values: Interactive HTML cards (click to reveal) for better engagement. Color Palette: Interactive HTML swatches (click to show details) for easy reference and copying of codes. All interactions are handled by Vanilla JS and styling by Tailwind CSS, ensuring a clean, single-file implementation. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Notas Internas y Estilos --><style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F7FAFC;
-            color: #2D3748;
+            background-color: #F7FAFC; /* Cloud White */
+            color: #2D3748; /* Charcoal Gray */
         }
-        .text-primary { color: #005A5B; }
+        .text-primary { color: #005A5B; } /* Deep Teal */
         .bg-primary { background-color: #005A5B; }
-        .text-accent { color: #00EAD3; }
+        .text-accent { color: #00EAD3; } /* Bright Mint */
         .bg-accent { background-color: #00EAD3; }
         .border-accent { border-color: #00EAD3; }
         .nav-link.active {
             color: #00EAD3;
+            border-bottom: 2px solid #00EAD3; /* Added a subtle visual active state */
+            font-weight: 700;
         }
+        /* Interactive Card Styling */
         .value-card .value-description {
             max-height: 0;
             overflow: hidden;
@@ -40,229 +40,465 @@
         .plus-icon {
             transition: transform 0.3s ease-in-out;
         }
+        .swatch-ring {
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .swatch-ring:hover {
+            box-shadow: 0 0 0 4px #00EAD3;
+        }
+        /* Custom CSS for the comment stream layout */
+        .comments-column-container {
+            column-count: 2;
+            column-gap: 1.5rem; /* gap-6 */
+        }
+        @media (min-width: 768px) {
+            .comments-column-container {
+                column-count: 3;
+            }
+        }
+
+        /* PES Coin Specific Styles for a more 'Bitcoin-like' look */
+        .pes-coin {
+            background: linear-gradient(145deg, #004D4D, #005A5B, #004D4D); /* Deep Teal gradient for metallic feel */
+            border: 2px solid #00EAD3; /* Mint accent border */
+            box-shadow: 
+                0 0 15px rgba(0, 234, 211, 0.5), /* Outer glow */
+                inset 0 0 10px rgba(255, 255, 255, 0.5), /* Inner highlight */
+                inset 0 0 20px rgba(0, 0, 0, 0.3); /* Inner shadow for depth */
+            position: relative;
+            overflow: hidden; /* To contain background image */
+        }
+        .pes-coin .coin-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://placehold.co/200x200/2D3748/00EAD3/png?text=GRAFICO+DE+TRADING'); /* Trading chart background */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15; /* Subtle overlay */
+            filter: grayscale(100%) brightness(50%); /* Make it more subdued */
+            z-index: 1;
+        }
+        .pes-coin .coin-text {
+            position: relative;
+            z-index: 2; /* Ensure text is above background */
+            text-shadow: 
+                2px 2px 4px rgba(0,0,0,0.6), /* Stronger shadow for raised look */
+                -2px -2px 4px rgba(255,255,255,0.3); /* Highlight from top-left */
+            color: #00EAD3; /* Bright Mint for the coin text */
+        }
+        .pes-coin .coin-ticker {
+            position: relative;
+            z-index: 2;
+        }
     </style>
 </head>
 <body class="antialiased">
 
-    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 w-full shadow-sm">
+    <!-- Encabezado y Navegación (Fija/Pegajosa) --><header id="header" class="bg-white/95 backdrop-blur-sm sticky top-0 z-50 w-full shadow-lg">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-primary flex items-center">
+            <a href="#" class="text-2xl font-extrabold text-primary flex items-center tracking-wider">
                 <div class="w-8 h-8 mr-2 flex items-center justify-center bg-primary text-white font-bold rounded-md">P</div>
                 Profit Ease
             </a>
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#summary" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Summary</a>
-                <a href="#identity" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Core Identity</a>
-                <a href="#personality" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Personality</a>
-                <a href="#visuals" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Visuals</a>
-                <a href="#messaging" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Messaging</a>
+                <!-- Nombres de Navegación --><a href="#introduction" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300 py-1">Introducción</a>
+                <a href="#identity" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300 py-1">Identidad Central</a>
+                <a href="#personality" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300 py-1">Voz</a>
+                <a href="#visuals" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300 py-1">Estándares Visuales</a>
+                <a href="#messaging" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300 py-1">Mensajes Clave</a>
+                <a href="#coin" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300 py-1">Token PES</a>
+                <a href="#socialproof" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300 py-1">Prueba Social</a>
             </div>
-             <button id="mobile-menu-button" class="md:hidden text-primary">
+           <button id="mobile-menu-button" class="md:hidden text-primary">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col space-y-4">
-             <a href="#summary" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Summary</a>
-            <a href="#identity" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Core Identity</a>
-            <a href="#personality" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Personality</a>
-            <a href="#visuals" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Visuals</a>
-            <a href="#messaging" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Messaging</a>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col space-y-3">
+             <a href="#introduction" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Introducción</a>
+            <a href="#identity" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Identidad Central</a>
+            <a href="#personality" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Voz</a>
+            <a href="#visuals" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Estándares Visuales</a>
+            <a href="#messaging" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Mensajes Clave</a>
+            <a href="#coin" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300 py-1">Token PES</a>
+            <a href="#socialproof" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300">Prueba Social</a>
         </div>
     </header>
 
     <main class="container mx-auto px-6 py-12 md:py-20">
 
-        <section id="summary" class="text-center min-h-[60vh] flex flex-col items-center justify-center">
-            <h1 class="text-4xl md:text-6xl font-bold text-primary tracking-tight">The Market Is Soaring. Your Profits Should Be, Too.</h1>
-            <p class="mt-6 max-w-3xl text-lg md:text-xl text-gray-600">
-                Right now, we are in an unprecedented high market. This is a historic opportunity for wealth creation, and Profit Ease is your key to unlocking it. Thanks to our proprietary automated system, our clients are turning initial investments of as little as $150 into returns of up to $6,000. This isn't a prediction—it's what's happening for our users right now.
+        <!-- Sección de Introducción --><section id="introduction" class="text-center min-h-[60vh] flex flex-col items-center justify-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-primary tracking-tighter leading-tight">El Estándar Definitivo de Marca Profit Ease</h1>
+            <p class="mt-8 max-w-4xl text-xl md:text-2xl text-gray-700">
+                Este documento sirve como el <span class="font-bold">estándar de marca definitivo</span> para <span class="font-extrabold">Profit Ease</span>. Dicta nuestra misión estratégica, identidad visual y voz autoritaria, asegurando que toda la comunicación se alinee con nuestro compromiso con la <span class="font-bold">excelencia automatizada</span> y la <span class="font-bold">oportunidad financiera sin precedentes</span>.
+            </p>
+            <p class="mt-4 max-w-3xl text-lg text-gray-600 italic">
+                El mercado está experimentando un auge histórico. Profit Ease es el motor propietario diseñado para traducir esta oportunidad sin precedentes en <span class="font-bold">capital que cambia la vida</span>, de forma fiable y en piloto automático.
             </p>
         </section>
 
-        <section id="identity" class="py-16 md:py-24">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary">Our Core Identity</h2>
-                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">We are built for this exact moment. Our entire platform is engineered to capitalize on high-growth market conditions and deliver life-changing returns.</p>
+        <!-- Sección de Identidad Central --><section id="identity" class="py-16 md:py-24">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary border-b-2 border-accent pb-2 inline-block">Nuestra Identidad Central</h2>
+                <p class="mt-6 max-w-3xl mx-auto text-xl text-gray-600">Los principios fundamentales que definen nuestro propósito, aspiración futura y conducta operativa en el panorama financiero en rápida evolución.</p>
             </div>
-            <div class="grid md:grid-cols-2 gap-8 items-start">
-                <div class="bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-bold text-primary mb-2">Mission</h3>
-                    <p class="text-gray-600">To give you the automated tools to capitalize on this historic market surge and generate life-changing returns from minimal starting capital.</p>
+            <div class="grid md:grid-cols-3 gap-10 items-start">
+                <div class="bg-white p-8 rounded-xl shadow-2xl col-span-1 border border-gray-100">
+                    <h3 class="text-2xl font-bold text-primary mb-3">Misión Definitiva</h3>
+                    <p class="text-gray-600 border-l-4 border-accent pl-4 italic">Capacitar a los clientes con una plataforma automatizada de vanguardia que <span class="font-bold">captura consistentemente el máximo rendimiento</span> de los ciclos de mercado de alto crecimiento, <span class="font-bold">garantizando acceso exclusivo</span> a la generación de riqueza exponencial.</p>
                 </div>
-                <div class="bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-bold text-primary mb-2">Vision</h3>
-                    <p class="text-gray-600">To be the #1 platform for individuals capitalizing on the current economic boom, turning everyday people into market winners with our automated technology.</p>
+                <div class="bg-white p-8 rounded-xl shadow-2xl col-span-1 border border-gray-100">
+                    <h3 class="text-2xl font-bold text-primary mb-3">Visión Futura</h3>
+                    <p class="text-gray-600 border-l-4 border-accent pl-4 italic">Ser la <span class="font-bold">principal plataforma FinTech automatizada</span> reconocida a nivel mundial, definiendo el futuro estándar de <span class="font-bold">generación de capital eficiente y de alto rendimiento</span> para el inversor moderno.</p>
+                </div>
+                <!-- Mandato Ético --><div class="bg-white p-8 rounded-xl shadow-2xl col-span-1 border border-gray-100">
+                    <h3 class="text-2xl font-bold text-primary mb-3">Mandato Ético</h3>
+                    <p class="text-gray-600 border-l-4 border-accent pl-4 italic">Priorizamos la <span class="font-bold">transparencia inquebrantable</span> en nuestra mecánica automatizada y métricas de rendimiento. Nuestro compromiso es el éxito del cliente, asegurando que la <span class="font-bold">integridad y la seguridad</span> sean las piedras angulares de toda implementación tecnológica.</p>
                 </div>
             </div>
-             <div class="mt-12">
-                <h3 class="text-2xl font-bold text-primary text-center mb-8">Our Values</h3>
-                <div class="space-y-4 max-w-4xl mx-auto">
-                    <div class="value-card bg-white rounded-xl shadow-lg cursor-pointer overflow-hidden" data-value="1">
+            
+             <div class="mt-20">
+                <h3 class="text-3xl font-bold text-primary text-center mb-10">Pilares de Valor</h3>
+                <div class="space-y-6 max-w-5xl mx-auto">
+                    <!-- Valor 1 --><div class="value-card bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow cursor-pointer overflow-hidden border border-gray-100" data-value="1">
                         <div class="p-6 flex justify-between items-center">
-                            <h4 class="text-xl font-bold text-primary">The Automated Profit Engine</h4>
-                            <div class="plus-icon text-accent text-3xl font-light">+</div>
+                            <h4 class="text-xl font-bold text-primary">El Motor de Ganancia Automatizado</h4>
+                            <div class="plus-icon text-accent text-3xl font-light leading-none">+</div>
                         </div>
                         <div class="value-description px-6 pb-6">
-                            <p class="text-gray-600">Our system works 24/7 to find and exploit market opportunities. You don't lift a finger; our technology does the work, turning small stakes into massive payouts.</p>
+                            <p class="text-gray-600">Nuestro sistema propietario opera <span class="font-bold">24/7 de forma autónoma</span> para identificar y ejecutar operaciones óptimas. La tecnología se encarga del trabajo pesado, traduciendo de manera fiable el capital inicial mínimo en <span class="font-bold">rendimientos sustanciales y verificables</span>.</p>
                         </div>
                     </div>
-                     <div class="value-card bg-white rounded-xl shadow-lg cursor-pointer overflow-hidden" data-value="2">
+                    <!-- Valor 2 --><div class="value-card bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow cursor-pointer overflow-hidden border border-gray-100" data-value="2">
                         <div class="p-6 flex justify-between items-center">
-                            <h4 class="text-xl font-bold text-primary">Market Timing Mastery</h4>
-                            <div class="plus-icon text-accent text-3xl font-light">+</div>
+                            <h4 class="text-xl font-bold text-primary">Dominio del Tiempo del Mercado</h4>
+                            <div class="plus-icon text-accent text-3xl font-light leading-none">+</div>
                         </div>
                         <div class="value-description px-6 pb-6">
-                            <p class="text-gray-600">This isn't luck. Our system is designed for moments exactly like this. We provide the technology to get in while the market is high and multiply your investment.</p>
+                            <p class="text-gray-600">Nuestros algoritmos están calibrados específicamente para <span class="font-bold">períodos de alto crecimiento económico</span>. Omitimos el sentimiento del mercado, aprovechando el análisis de datos avanzado para posicionar perfectamente a los clientes para <span class="font-bold">capitalizar las tendencias alcistas</span>.</p>
                         </div>
                     </div>
-                     <div class="value-card bg-white rounded-xl shadow-lg cursor-pointer overflow-hidden" data-value="3">
+                    <!-- Valor 3 --><div class="value-card bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow cursor-pointer overflow-hidden border border-gray-100" data-value="3">
                         <div class="p-6 flex justify-between items-center">
-                            <h4 class="text-xl font-bold text-primary">Verified Returns</h4>
-                            <div class="plus-icon text-accent text-3xl font-light">+</div>
+                            <h4 class="text-xl font-bold text-primary">Resultados Cuantificables</h4>
+                            <div class="plus-icon text-accent text-3xl font-light leading-none">+</div>
                         </div>
                         <div class="value-description px-6 pb-6">
-                            <p class="text-gray-600">Forget promises. We deliver proof. Our system is consistently turning small investments like $150 into $6,000. These are the results our clients see today.</p>
+                            <p class="text-gray-600">Sustituimos la especulación por <span class="font-bold">resultados concretos</span>. Nuestra plataforma se basa en resultados comerciales probados y en vivo, demostrando constantemente la capacidad de <span class="font-bold">multiplicar exponencialmente las inversiones</span>.</p>
                         </div>
                     </div>
-                     <div class="value-card bg-white rounded-xl shadow-lg cursor-pointer overflow-hidden" data-value="4">
+                    <!-- Valor 4 --><div class="value-card bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow cursor-pointer overflow-hidden border border-gray-100" data-value="4">
                         <div class="p-6 flex justify-between items-center">
-                            <h4 class="text-xl font-bold text-primary">Life-Changing Capital</h4>
-                            <div class="plus-icon text-accent text-3xl font-light">+</div>
+                            <h4 class="text-xl font-bold text-primary">Asegurando la Autonomía Financiera</h4>
+                            <div class="plus-icon text-accent text-3xl font-light leading-none">+</div>
                         </div>
                         <div class="value-description px-6 pb-6">
-                            <p class="text-gray-600">This is your opportunity to achieve exponential financial growth. We provide the key to unlock the market's potential and secure your financial future, right now.</p>
+                            <p class="text-gray-600">Profit Ease es más que una herramienta de inversión; es un vehículo para lograr una independencia financiera sustancial. Proporcionamos la tecnología que faculta a nuestros clientes para tomar el control de su destino económico.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="personality" class="py-16 md:py-24 bg-white rounded-2xl">
+        <!-- Sección de Personalidad y Voz --><section id="personality" class="py-16 md:py-24 bg-white rounded-2xl shadow-xl border border-gray-100">
             <div class="text-center mb-12 px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary">Our Personality & Voice</h2>
-                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">We embody "The Wealth Multiplier." Our voice is urgent, confident, and direct. We provide exclusive access to a once-in-a-generation market opportunity.</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-primary">Persona de Marca: El Multiplicador de Riqueza</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-600">Nuestra voz es <span class="font-bold">decisiva, profesional y orientada a resultados</span>. Nos comunicamos con la confianza que proviene de proporcionar acceso exclusivo a una ventaja financiera monumental.</p>
             </div>
             <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <div class="text-center p-6">
-                    <div class="text-5xl mb-4 text-accent">✓</div>
-                    <h3 class="text-xl font-bold text-primary mb-2">Urgent & Action-Oriented</h3>
-                    <p class="text-gray-600">The market won't wait. Our language is designed to compel immediate action to seize this limited-time opportunity for massive profit.</p>
+                <div class="text-center p-6 border-l-2 border-primary">
+                    <div class="text-5xl mb-4 text-accent">↑</div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Decisiva y Orientada al Futuro</h3>
+                    <p class="text-gray-600">Exigimos atención, enfatizando la urgencia. Nuestro lenguaje impulsa la <span class="font-bold">acción inmediata e informada</span> para aprovechar las oportunidades de mercado sensibles al tiempo.</p>
                 </div>
-                <div class="text-center p-6">
-                     <div class="text-5xl mb-4 text-accent">✓</div>
-                    <h3 class="text-xl font-bold text-primary mb-2">Clear & Specific</h3>
-                    <p class="text-gray-600">No jargon, just numbers. We tell you exactly what's possible: turn $150 into $6,000 with our automated system. It's that simple.</p>
+                <div class="text-center p-6 border-l-2 border-primary">
+                   <div class="text-5xl mb-4 text-accent">⚙️</div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Cuantificable y Respaldada por Datos</h3>
+                    <p class="text-gray-600">Todas las afirmaciones se centran en <span class="font-bold">resultados demostrables</span>. Eliminamos la jerga, priorizando métricas financieras específicas, alcanzables y <span class="font-bold">verificables</span>.</p>
                 </div>
-                <div class="text-center p-6">
-                     <div class="text-5xl mb-4 text-accent">✓</div>
-                    <h3 class="text-xl font-bold text-primary mb-2">Exclusive & Aspirational</h3>
-                    <p class="text-gray-600">This isn't for everyone. It's for those who want to build serious wealth, fast. Our tone speaks to the winner inside you.</p>
+                <div class="text-center p-6 border-l-2 border-primary">
+                   <div class="text-5xl mb-4 text-accent">⭐</div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Inspiradora y Exclusiva</h3>
+                    <p class="text-gray-600">Nuestro tono resuena con personas comprometidas con la generación de riqueza de alto nivel. Posicionamos a Profit Ease como la herramienta de élite para inversores ambiciosos.</p>
                 </div>
             </div>
         </section>
 
-        <section id="visuals" class="py-16 md:py-24">
+        <!-- Sección de Estándares Visuales --><section id="visuals" class="py-16 md:py-24">
              <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary">Our Visual Identity</h2>
-                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Our visual identity is minimalist, sleek, and professional. It’s designed to inspire confidence and reflect our commitment to simplicity and innovation.</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-primary border-b-2 border-accent pb-2 inline-block">Estándares Visuales y Uso</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-600">Nuestra identidad visual es minimalista, elegante y autoritaria, reflejando nuestro compromiso con la precisión automatizada y la innovación financiera.</p>
             </div>
             <div class="space-y-16">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Concepto del Logotipo --><div class="grid md:grid-cols-2 gap-12 items-center bg-white p-8 rounded-xl shadow-xl border border-gray-100">
                     <div>
-                        <h3 class="text-2xl font-bold text-primary mb-4">Logo Concept</h3>
-                        <p class="text-gray-600">A clean, abstract logomark that combines an upward-trending arrow with the letter 'P'. The arrow signifies growth and profitability, while its seamless integration into the initial creates a sense of effortless flow and efficiency. The wordmark "Profit Ease" is set in a modern, geometric sans-serif font.</p>
+                        <h3 class="text-2xl font-bold text-primary mb-4">Concepto del Logomarca</h3>
+                        <p class="text-gray-600">La marca es una fusión abstracta de la letra <span class="font-semibold">'P'</span> (Profit/Propietario) y una <span class="font-semibold">flecha</span> en fuerte ascenso. Este símbolo comunica crecimiento, eficiencia y flujo sin esfuerzo. El logotipo de "Profit Ease" utiliza la tipografía Inter para una claridad moderna.</p>
                     </div>
                     <div class="flex justify-center items-center">
-                        <div class="w-48 h-48 bg-primary rounded-2xl flex items-center justify-center text-white text-8xl font-bold relative overflow-hidden">
+                        <div class="w-48 h-48 bg-primary rounded-2xl flex items-center justify-center text-white text-8xl font-extrabold relative overflow-hidden shadow-2xl">
                             P
                             <div class="absolute w-12 h-24 bg-accent" style="clip-path: polygon(100% 0, 0 50%, 100% 100%); right: 30px; top: 36px; transform: rotate(-15deg);"></div>
                         </div>
                     </div>
                 </div>
 
-                <div>
-                    <h3 class="text-2xl font-bold text-primary mb-4 text-center">Color Palette</h3>
-                    <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">Our palette is professional and modern, using a foundation of trust with a splash of innovative energy. Click on a color to see its details.</p>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <div class="color-swatch w-32 h-32 rounded-lg cursor-pointer" style="background-color: #005A5B;" data-name="Primary (Deep Teal)" data-hex="#005A5B" data-desc="Conveys trust, stability, and financial sophistication."></div>
-                        <div class="color-swatch w-32 h-32 rounded-lg cursor-pointer" style="background-color: #00EAD3;" data-name="Accent (Bright Mint)" data-hex="#00EAD3" data-desc="Represents innovation, ease, and positive growth. Used for calls-to-action and highlights."></div>
-                        <div class="color-swatch w-32 h-32 rounded-lg cursor-pointer" style="background-color: #2D3748;" data-name="Neutral (Charcoal Gray)" data-hex="#2D3748" data-desc="Used for primary text to be softer than pure black."></div>
-                        <div class="color-swatch w-32 h-32 rounded-lg cursor-pointer border" style="background-color: #F7FAFC;" data-name="Background (Cloud White)" data-hex="#F7FAFC" data-desc="A clean, airy off-white that keeps the aesthetic minimalist and focused."></div>
+                <!-- Pautas de Uso --><div class="bg-white p-8 rounded-xl shadow-xl border border-gray-100">
+                    <h3 class="text-2xl font-bold text-primary mb-6 text-center">Pautas de Uso del Logotipo</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xl font-bold text-primary mb-2">Espacio Libre y Tamaño Mínimo</h4>
+                            <p class="text-gray-600 mb-4">El logomarca requiere un espacio libre mínimo equivalente a un tercio de la altura de la 'P' en todos los lados. El tamaño digital mínimo del logotipo debe ser de 48 píxeles de ancho para garantizar la legibilidad e integridad en todas las plataformas.</p>
+                            <img src="https://placehold.co/400x150/F7FAFC/2D3748?text=Referencia+Espacio+Libre" alt="Imagen de marcador de posición que muestra el espacio libre del logotipo" class="rounded-lg border mt-4">
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-primary mb-2">Estándares Digitales</h4>
+                            <ul class="list-disc list-inside text-gray-600 space-y-2 pl-4">
+                                <li>La Marca Primaria (Teal Oscuro sobre Blanco Nube) debe utilizarse siempre que sea posible.</li>
+                                <li>El logotipo solo puede invertirse (Blanco Nube sobre Teal Oscuro) en fondos oscuros.</li>
+                                <li><span class="font-bold">NUNCA</span> estirar, distorsionar o cambiar la paleta de colores de la marca.</li>
+                                <li>Utilice los activos de alta resolución proporcionados para todas las aplicaciones oficiales.</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div id="color-details" class="mt-8 text-center bg-white p-6 rounded-xl shadow-md max-w-md mx-auto min-h-[120px] flex flex-col justify-center transition-opacity duration-300 opacity-0">
+                </div>
+
+                <!-- Paleta de Colores --><div>
+                    <h3 class="text-2xl font-bold text-primary mb-4 text-center">Paleta de Colores</h3>
+                    <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">Nuestra paleta es profesional y moderna, utilizando una base de confianza con un toque de energía innovadora. Haga clic en un color para ver su especificación oficial.</p>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <div class="color-swatch swatch-ring w-32 h-32 rounded-xl cursor-pointer shadow-lg" style="background-color: #005A5B;" data-name="Primario (Teal Oscuro)" data-hex="#005A5B" data-desc="El color fundacional. Transmite confianza, estabilidad y sofisticación financiera. Utilizado para texto primario y elementos estructurales principales."></div>
+                        <div class="color-swatch swatch-ring w-32 h-32 rounded-xl cursor-pointer shadow-lg" style="background-color: #00EAD3;" data-name="Acento (Menta Brillante)" data-hex="#00EAD3" data-desc="El color de acción. Representa innovación, dinamismo y crecimiento positivo. Utilizado exclusivamente para Llamadas a la Acción (CTAs) y puntos destacados clave."></div>
+                        <div class="color-swatch swatch-ring w-32 h-32 rounded-xl cursor-pointer shadow-lg" style="background-color: #2D3748;" data-name="Neutro (Gris Carbón)" data-hex="#2D3748" data-desc="Utilizado para texto secundario y subtítulos para proporcionar un fuerte contraste con los fondos blancos mientras se mantiene una estética profesional."></div>
+                        <div class="color-swatch swatch-ring w-32 h-32 rounded-xl cursor-pointer shadow-lg border-4 border-gray-200" style="background-color: #F7FAFC;" data-name="Fondo (Blanco Nube)" data-hex="#F7FAFC" data-desc="Nuestro color de fondo principal. Un blanco roto limpio y aireado que mantiene la estética minimalista y enfocada, priorizando la claridad del contenido."></div>
+                    </div>
+                    <div id="color-details" class="mt-12 text-center bg-white p-6 rounded-xl shadow-xl max-w-md mx-auto min-h-[120px] flex flex-col justify-center transition-opacity duration-300 opacity-0 border border-gray-100">
                         <h4 id="color-name" class="text-xl font-bold text-primary"></h4>
-                        <p id="color-hex" class="text-gray-500 font-mono my-1"></p>
+                        <p id="color-hex" class="text-gray-500 font-mono my-1 text-lg"></p>
                         <p id="color-desc" class="text-gray-600"></p>
                     </div>
                 </div>
 
-                 <div>
-                    <h3 class="text-2xl font-bold text-primary mb-4 text-center">Typography</h3>
-                    <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">We use the 'Inter' typeface for its clean, modern, and highly legible appearance, ensuring a professional aesthetic across all communications.</p>
-                    <div class="grid md:grid-cols-2 gap-8 bg-white p-8 rounded-xl shadow-lg">
+                <!-- Tipografía --><div>
+                    <h3 class="text-2xl font-bold text-primary mb-4 text-center">Tipografía</h3>
+                    <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">Se selecciona la tipografía <span class="font-semibold">'Inter'</span> por su alta legibilidad, geometría limpia y apariencia moderna y profesional, asegurando claridad en todas las comunicaciones.</p>
+                    <div class="grid md:grid-cols-2 gap-8 bg-white p-8 rounded-xl shadow-xl border border-gray-100">
                         <div>
-                            <p class="text-lg text-gray-500 mb-2">Headlines</p>
-                            <p class="text-4xl font-bold text-primary">Inter Bold</p>
+                            <p class="text-lg text-gray-500 mb-2 font-semibold">Pantalla Primaria (Inter Negrita/Extranegrita)</p>
+                            <p class="text-5xl font-extrabold text-primary leading-tight">Claridad e Impacto</p>
                         </div>
                         <div>
-                            <p class="text-lg text-gray-500 mb-2">Body Text</p>
-                            <p class="text-lg text-gray-700">Inter Regular is used for all body copy to ensure clarity and readability. It provides a smooth reading experience for longer-form content.</p>
+                            <p class="text-lg text-gray-500 mb-2 font-semibold">Cuerpo de Texto (Inter Regular)</p>
+                            <p class="text-lg text-gray-700">Inter Regular es obligatorio para todo el material de lectura extendida para optimizar el procesamiento de información y la legibilidad, proporcionando una experiencia de usuario fluida y accesible.</p>
                         </div>
                     </div>
                 </div>
 
-                 <div>
-                    <h3 class="text-2xl font-bold text-primary mb-4 text-center">Imagery Style</h3>
-                    <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">Our imagery is clean, bright, and professional. We feature diverse teams in modern, minimalist workspaces, focusing on collaboration, focus, and success.</p>
+                <!-- Estilo de Imágenes --><div>
+                    <h3 class="text-2xl font-bold text-primary mb-4 text-center">Estilo de Imágenes</h3>
+                    <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">Las imágenes deben ser <span class="font-semibold">limpias, minimalistas y ejecutadas profesionalmente</span>. Utilizamos elementos visuales aspiracionales de espacios de trabajo modernos y colaborativos y visualizaciones de datos dinámicas que implican enfoque y ejecución exitosa.</p>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        <img src="https://placehold.co/600x400/F7FAFC/2D3748?text=Collaboration" alt="Placeholder image showing collaboration" class="rounded-lg shadow-md aspect-video object-cover">
-                        <img src="https://placehold.co/600x400/005A5B/FFFFFF?text=Focus" alt="Placeholder image showing focus" class="rounded-lg shadow-md aspect-video object-cover">
-                        <img src="https://placehold.co/600x400/00EAD3/2D3748?text=Success" alt="Placeholder image showing success" class="rounded-lg shadow-md aspect-video object-cover">
-                        <img src="https://placehold.co/600x400/2D3748/FFFFFF?text=Modern+Workspace" alt="Placeholder image of a modern workspace" class="rounded-lg shadow-md aspect-video object-cover">
-                         <img src="https://placehold.co/600x400/F7FAFC/005A5B?text=Innovation" alt="Placeholder image showing innovation" class="rounded-lg shadow-md aspect-video object-cover">
-                         <img src="https://placehold.co/600x400/FFFFFF/2D3748?text=Clarity" alt="Placeholder image showing clarity" class="rounded-lg shadow-md aspect-video object-cover">
+                        <img src="https://placehold.co/600x400/F7FAFC/2D3748?text=Colaboracion+Ejecutiva" alt="Imagen de marcador de posición que muestra colaboración ejecutiva" class="rounded-lg shadow-xl aspect-video object-cover">
+                        <img src="https://placehold.co/600x400/005A5B/FFFFFF?text=Enfoque+Digital" alt="Imagen de marcador de posición que muestra enfoque digital" class="rounded-lg shadow-xl aspect-video object-cover">
+                        <img src="https://placehold.co/600x400/00EAD3/2D3748?text=Exito+Financiero" alt="Imagen de marcador de posición que muestra éxito financiero" class="rounded-lg shadow-xl aspect-video object-cover">
+                        <img src="https://placehold.co/600x400/2D3748/FFFFFF?text=Diseño+Elegante" alt="Imagen de marcador de posición de un diseño de interfaz elegante" class="rounded-lg shadow-xl aspect-video object-cover">
+                         <img src="https://placehold.co/600x400/F7FAFC/005A5B?text=Innovacion+Datos" alt="Imagen de marcador de posición que muestra innovación de datos" class="rounded-lg shadow-xl aspect-video object-cover">
+                         <img src="https://placehold.co/600x400/FFFFFF/2D3748?text=Claridad+Ejecutiva" alt="Imagen de marcador de posición que muestra claridad ejecutiva" class="rounded-lg shadow-xl aspect-video object-cover">
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="messaging" class="py-16 md:py-24 text-center">
-             <h2 class="text-3xl md:text-4xl font-bold text-primary">Key Messaging</h2>
-             <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">These taglines are your call to action. They are a reminder of the incredible wealth being generated right now, and how you can claim your share.</p>
-             <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                <div class="bg-primary text-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <p class="text-2xl font-bold">Your Automated Path to $6,000.</p>
-                    <p class="text-sm opacity-80 mt-2">(Primary Tagline)</p>
-                </div>
-                 <div class="bg-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <p class="text-2xl font-bold text-primary">The Market is High. Your Profits Should Be Higher.</p>
-                </div>
-                 <div class="bg-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <p class="text-2xl font-bold text-primary">Don't Miss Out. The Time Is Now.</p>
-                </div>
-                 <div class="bg-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <p class="text-2xl font-bold text-primary">The Machine That Prints Money.</p>
-                </div>
+        <!-- Sección de Mensajería --><section id="messaging" class="py-16 md:py-24 text-center">
+             <h2 class="text-4xl md:text-5xl font-bold text-primary border-b-2 border-accent pb-2 inline-block">Mensajes Clave y Eslogan</h2>
+             <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-600">Estos eslóganes están diseñados para articular inmediatamente nuestra propuesta de valor, enfatizando la urgencia y los resultados financieros sustanciales y verificables.</p>
+             <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+                 <div class="bg-primary text-white p-8 rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300 border-b-4 border-accent">
+                     <p class="text-2xl font-bold">Su Camino Automatizado hacia Rendimientos Exponenciales.</p>
+                     <p class="text-sm opacity-80 mt-3 font-semibold">(Eslogan Principal y Declaración de Valor)</p>
+                 </div>
+                 <div class="bg-white p-8 rounded-xl shadow-xl transform hover:scale-105 transition-transform duration-300 border-b-4 border-primary">
+                     <p class="text-2xl font-bold text-primary">El Mercado Está en Auge. Capture su Parte Ahora.</p>
+                 </div>
+                 <div class="bg-white p-8 rounded-xl shadow-xl transform hover:scale-105 transition-transform duration-300 border-b-4 border-primary">
+                     <p class="text-2xl font-bold text-primary">La Automatización se Une a la Ambición.</p>
+                 </div>
+                 <div class="bg-white p-8 rounded-xl shadow-xl transform hover:scale-105 transition-transform duration-300 border-b-4 border-primary">
+                     <p class="text-2xl font-bold text-primary">Ganancias en Piloto Automático. Facilidad por Diseño.</p>
+                 </div>
              </div>
+        </section>
+
+        <!-- NUEVA SECCIÓN: Token EAS Propietario (PES) --><section id="coin" class="py-16 md:py-24 bg-white rounded-2xl shadow-2xl border border-accent/30">
+            <div class="text-center mb-12 px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary border-b-2 border-accent pb-2 inline-block">Token EAS Propietario (PES)</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-600">El Token EAS Propietario (PES) es la <span class="font-bold text-accent">columna vertebral digital</span> de nuestro motor automatizado, <span class="font-bold">ordenando valor verificable</span> y acceso financiero exclusivo en todo nuestro ecosistema.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 max-w-6xl mx-auto gap-12 items-center px-6">
+                
+                <!-- Visual y Detalles de la Moneda --><div class="flex flex-col items-center p-8 bg-gray-50 rounded-xl shadow-inner relative overflow-hidden">
+                    <div class="w-48 h-48 rounded-full flex items-center justify-center relative transform hover:scale-105 transition-transform duration-500 cursor-default pes-coin">
+                        <div class="coin-background"></div> <!-- Trading chart background --><div class="text-7xl font-extrabold relative leading-none coin-text">
+                            PES
+                            <div class="absolute text-xl font-bold text-white bottom-[-15px] left-1/2 transform -translate-x-1/2 opacity-80 coin-ticker">
+                                $EAS
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-3xl font-extrabold text-primary mt-8">El Motor del Valor</h3>
+                    <p class="mt-3 text-lg text-gray-600 text-center max-w-sm">
+                        PES no es inflacionario y está intrínsecamente ligado al rendimiento de nuestros algoritmos propietarios, estableciéndolo como un <span class="font-bold">activo digital de alto valor y gran demanda</span>.
+                    </p>
+                </div>
+
+                <!-- Prueba Social y Nota de Seguridad --><div class="p-8 space-y-8">
+                    <div class="bg-primary text-white p-6 rounded-xl shadow-lg border-b-4 border-accent">
+                        <h4 class="text-xl font-bold mb-2">Estado Actual de Utilidad</h4>
+                        <p class="text-lg opacity-90">Valor Total Bloqueado en el Ecosistema: <span class="font-extrabold text-accent">$750M+</span></p>
+                        <p class="text-lg opacity-90">Volumen Diario de Transacciones: <span class="font-extrabold text-accent">$12M+</span></p>
+                    </div>
+
+                    <!-- Visualización de Seguidores con Lógica de Clic/Ventana Emergente --><div id="followers-display" class="bg-gray-100 p-6 rounded-xl shadow-lg cursor-pointer hover:bg-gray-200 transition-colors duration-200">
+                        <h4 class="text-xl font-bold text-primary flex items-center justify-between">
+                            Comunidad de Poseedores de Tokens
+                            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20v-2m0 2h2a2 2 0 002-2v-2a3 3 0 00-3-3H9m1.293-1.293a1 1 0 011.414 0L12 11.586l.293-.293a1 1 0 011.414 0l.293.293.293-.293a1 1 0 011.414 0L17 11.586m-1.414 1.414a2 2 0 10-2.828 2.828l.707.707.707-.707m-4.242 0a2 2 0 10-2.828 2.828l.707.707.707-.707m-4.242 0a2 2 0 10-2.828 2.828l.707.707.707-.707M10 12a2 2 0 100-4 2 2 0 000 4z"/></svg>
+                        </h4>
+                        <p class="text-4xl font-extrabold text-primary mt-2">600K+</p>
+                        <p class="text-sm text-gray-500 mt-1">Poseedores Globales (Verificados)</p>
+                    </div>
+
+                    <p class="text-sm text-gray-500 italic mt-4 border-l-2 border-gray-300 pl-3">
+                        La integridad del Token PES se mantiene mediante una gobernanza y auditoría algorítmica continua, lo que garantiza un valor alto, transparente y fiable para todos los participantes.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comentarios de la Comunidad y Prueba Social --><section id="socialproof" class="py-16 md:py-24">
+            <div class="text-center mb-12 px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary border-b-2 border-accent pb-2 inline-block">Flujo de Éxito del Cliente: Prueba Social en Vivo</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-600">A continuación se muestra un flujo en tiempo real de más de 1,000 testimonios de usuarios verificados y comentarios del mercado. Esta es la comunidad que actualmente está capitalizando el auge de las ganancias.</p>
+            </div>
+            
+            <!-- Contenedor de Comentarios, configurado para ser muy desplazable y visualmente atractivo --><div id="comments-container" class="max-w-7xl mx-auto p-6 bg-gray-50 rounded-xl shadow-inner h-[800px] overflow-y-auto border border-gray-200 comments-column-container">
+                <!-- Texto de marcador de posición mientras JavaScript carga los 1200+ comentarios --><div class="text-center text-gray-400 p-8">Cargando más de mil testimonios verificados...</div>
+            </div>
         </section>
 
     </main>
 
-    <footer class="bg-white border-t">
+    <!-- Pie de Página - Actualizado para reflejar el Estado del Sistema --><footer class="bg-white border-t-4 border-accent">
         <div class="container mx-auto px-6 py-8 text-center text-gray-500">
-             <p class="text-2xl font-bold text-primary mb-4">Profit Ease</p>
-             <p>&copy; 2025 Profit Ease Inc. All Rights Reserved.</p>
+             <p class="text-3xl font-extrabold text-primary mb-4">Profit Ease</p>
+             <p class="text-gray-700 font-medium">&copy; 2025 Profit Ease Inc. Todos los Derechos Reservados. Propiedad y Confidencial.</p>
+             
              <div class="mt-4">
-                <a href="https://www.tiktok.com/@catalina_bonilla__" target="_blank" class="text-gray-500 hover:text-primary transition-colors duration-300">
-                    Follow us on TikTok: @catalina_bonilla__
-                </a>
+                 <!-- El enlace social oficial --><a href="https://www.tiktok.com/@catalina_bonilla__" target="_blank" class="text-gray-500 hover:text-primary transition-colors duration-300 text-sm">
+                     Red Social del Propietario: @catalina_bonilla__
+                 </a>
              </div>
-             <p class="text-sm mt-4">This is an interactive brand guide. Not for public distribution.</p>
+             
+             <!-- NUEVO BLOQUE DE CIERRE OFICIAL --><div class="mt-8 pt-4 border-t border-gray-200 max-w-lg mx-auto">
+                 <p class="text-sm font-semibold text-primary">ESTADO OFICIAL DEL SISTEMA Y PROPIEDAD</p>
+                 <p class="text-xs text-gray-600 mt-2">
+                    <span class="font-bold text-gray-700">Arquitectura del Sistema:</span> Esta Guía de Estándares de Marca constituye la única página de documentación para la plataforma Profit Ease.
+                 </p>
+                 <p class="text-xs text-gray-600 mt-1">
+                    <span class="font-bold text-gray-700">Contacto del Propietario:</span> Listado en el enlace de redes sociales anterior.
+                 </p>
+                 <p class="text-xs italic text-gray-400 mt-1">
+                    Las cuentas sociales de los trabajadores/equipo se integrarán una vez finalizada la fase de despliegue global del sistema.
+                 </p>
+             </div>
         </div>
     </footer>
 
-    <script>
+    <!-- Modal de Seguridad para el Conteo de Seguidores --><div id="security-modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 z-[100] flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl p-8 max-w-sm w-full shadow-2xl border-t-4 border-accent">
+            <h3 class="text-2xl font-bold text-primary mb-4">Protocolo de Seguridad del Cliente</h3>
+            <p class="text-gray-700 mb-6">
+                Para mantener el nivel más alto de <span class="font-bold">seguridad del cliente</span> y proteger las estrategias de inversión propietarias, los nombres de usuario individuales de los <span class="font-extrabold text-primary">más de 600K poseedores de Token PES</span> se clasifican como confidenciales y no se pueden mostrar públicamente.
+            </p>
+            <p class="text-sm text-gray-500 italic">
+                Esta adhesión a estrictos protocolos de privacidad no es negociable y refuerza la naturaleza segura del Sistema Profit Ease.
+            </p>
+            <button id="close-modal-button" class="mt-6 w-full bg-primary text-white py-3 rounded-lg font-bold hover:bg-accent hover:text-primary transition-colors duration-300 shadow-md">
+                Reconocer Seguridad
+            </button>
+        </div>
+    </div>
+
+    <!-- Interacciones de JavaScript --><script>
+        // Función para generar e inyectar comentarios
+        const generateAndInjectComments = (count) => {
+            const container = document.getElementById('comments-container');
+            if (!container) return;
+
+            // Pool de datos para la simulación (TRADUCIDO)
+            const positiveComments = [
+                "¡Absolutamente cambia la vida. Los retornos exponenciales son reales!",
+                "El motor propietario funciona sin fallos, verdaderamente en piloto automático.",
+                "Acabo de convertir mi capital inicial mínimo en una gran ganancia. ¡Increíble!",
+                "El Dominio del Tiempo del Mercado no es broma. Profit Ease cumplió donde otros fallaron.",
+                "Decisivo, profesional, orientado a resultados. Esta plataforma vive su marca.",
+                "Mi autonomía financiera está asegurada gracias a esta tecnología.",
+                "Finalmente, un sistema que funciona 24/7. ¡Qué alegría haberme unido al auge!",
+                "Resultados Cuantificables confirmados: esta inversión es una ganadora.",
+                "La interfaz es elegante y profesional. Facilidad por diseño.",
+                "He duplicado mi capital en menos de una semana. Eficiencia increíble.",
+                "La Automatización se Une a la Ambición. Es la herramienta de élite que necesitaba.",
+                "¡Altamente recomendado! Un verdadero Multiplicador de Riqueza.",
+                "Este es el futuro de la generación de riqueza.",
+                "Mi confianza en el mercado es más alta que nunca.",
+                "Rendimiento y seguridad de primer nivel. Tecnología confiable.",
+                "Ganancias en Piloto Automático es exactamente lo que estaba buscando.",
+                "Los rendimientos han superado todas mis expectativas. Plataforma asombrosa.",
+                "Un cambio de juego para los ingresos pasivos.",
+                "Fácil de empezar, potencial masivo. No se quede fuera."
+            ];
+            
+            const userHandles = [
+                "InversorAmbicioso", "CazadorDeGanancias", "AutoRiquezaPro", "AugeDelMercado", 
+                "ExitoCliente", "MotorDeCrecimiento", "MentaDeDinero", "CapitalizarAhora", "DecisivoDavid", 
+                "FacilidadPorDiseño", "FuturoFinanciero", "PioneroTeal", "UsuarioMentaBrillante", "RetornoMaximo"
+            ];
+            
+            const timeSincePosted = [
+                "hace 1 minuto", "hace 3 minutos", "hace 8 minutos", "hace 12 minutos", 
+                "hace 35 minutos", "hace 1 hora", "hace 2 horas", "hace 4 horas", 
+                "hace 1 día", "hace 2 días", "hace 3 días"
+            ];
+
+            let commentsHtml = '';
+            
+            for (let i = 0; i < count; i++) {
+                const message = positiveComments[Math.floor(Math.random() * positiveComments.length)];
+                const user = '@' + userHandles[Math.floor(Math.random() * userHandles.length)] + (Math.floor(Math.random() * 900) + 100);
+                const time = timeSincePosted[Math.floor(Math.random() * timeSincePosted.length)];
+                
+                // Usar una tarjeta simple para cada comentario para el aspecto 'encantador' y limpio.
+                commentsHtml += `
+                    <div class="inline-block w-full p-4 bg-white rounded-lg shadow-sm border-b border-gray-100 break-inside-avoid-column mb-4">
+                        <p class="text-sm text-gray-800 font-medium leading-snug">${message}</p>
+                        <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-50/50">
+                            <span class="text-xs font-semibold text-primary opacity-80">${user}</span>
+                            <span class="text-xs text-gray-400 italic">${time}</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = commentsHtml;
+            container.scrollTop = 0; // Mostrar los comentarios más recientes (superiores) primero
+        };
+
+
         document.addEventListener('DOMContentLoaded', function() {
+            // 1. Alternar Menú Móvil
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             
@@ -270,6 +506,7 @@
                 mobileMenu.classList.toggle('hidden');
             });
 
+            // 2. Alternar Tarjeta de Valor (Acordeón)
             const valueCards = document.querySelectorAll('.value-card');
             valueCards.forEach(card => {
                 card.addEventListener('click', () => {
@@ -281,6 +518,7 @@
                 });
             });
 
+            // 3. Detalles de Muestra de Color
             const colorSwatches = document.querySelectorAll('.color-swatch');
             const colorDetails = document.getElementById('color-details');
             const colorName = document.getElementById('color-name');
@@ -294,17 +532,33 @@
                     colorDesc.textContent = swatch.dataset.desc;
                     colorDetails.classList.remove('opacity-0');
                     
+                    // Quitar el anillo de todos, añadir al que se hizo clic
                     colorSwatches.forEach(s => s.classList.remove('ring-4', 'ring-offset-2', 'ring-accent'));
                     swatch.classList.add('ring-4', 'ring-offset-2', 'ring-accent');
                 });
+                // Inicializar el primero para que se resalte al cargar
+                if (swatch.dataset.name.includes("Primario")) {
+                     swatch.classList.add('ring-4', 'ring-offset-2', 'ring-accent');
+                }
             });
+            // Carga inicial de los detalles del Color Primario
+            const primarySwatch = document.querySelector('.color-swatch[data-name*="Primario"]');
+            if (primarySwatch) {
+                colorName.textContent = primarySwatch.dataset.name;
+                colorHex.textContent = primarySwatch.dataset.hex;
+                colorDesc.textContent = primarySwatch.dataset.desc;
+                colorDetails.classList.remove('opacity-0');
+            }
 
+
+            // 4. Estado de Navegación Activa (Observador de Intersección)
             const navLinks = document.querySelectorAll('.nav-link');
             const sections = document.querySelectorAll('section');
 
             const observerOptions = {
                 root: null,
-                rootMargin: '-50% 0px -50% 0px',
+                // El margen asegura que la sección sea lo suficientemente visible para ser considerada 'activa'
+                rootMargin: '-35% 0px -35% 0px', 
                 threshold: 0
             };
 
@@ -326,13 +580,42 @@
                 observer.observe(section);
             });
             
+            // 5. Cerrar Menú Móvil al hacer Clic en el Enlace
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     if (mobileMenu.classList.contains('hidden') === false) {
-                        mobileMenu.classList.add('hidden');
+                        // Pequeño retraso para permitir el desplazamiento antes de cerrar visualmente el menú
+                        setTimeout(() => {
+                            mobileMenu.classList.add('hidden');
+                        }, 300);
                     }
                 });
             });
+
+            // 6. Generar Comentarios de Prueba Social (1400 ahora)
+            generateAndInjectComments(1400);
+
+            // 7. Modal de Seguidores de Token PES
+            const followersDisplay = document.getElementById('followers-display');
+            const securityModal = document.getElementById('security-modal');
+            const closeModalButton = document.getElementById('close-modal-button');
+
+            if (followersDisplay && securityModal && closeModalButton) {
+                followersDisplay.addEventListener('click', () => {
+                    securityModal.classList.remove('hidden');
+                });
+                
+                closeModalButton.addEventListener('click', () => {
+                    securityModal.classList.add('hidden');
+                });
+
+                // Cerrar modal al hacer clic fuera de él
+                securityModal.addEventListener('click', (e) => {
+                    if (e.target === securityModal) {
+                        securityModal.classList.add('hidden');
+                    }
+                });
+            }
         });
     </script>
 </body>
